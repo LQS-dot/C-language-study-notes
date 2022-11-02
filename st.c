@@ -3,8 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#include <unistd.h >
-#include <windows.h>
+// #include <unistd.h >
+// #include <windows.h>
 #include <stdlib.h>
 
 /*
@@ -2440,55 +2440,89 @@
 // contanct.c  contanct.h test.c
 // 1 增 2. 删 3 改 4查 5排序 6输出
 
-#include "contanct.h"
+// #include "contanct.h"
 
-void Print(){
-    printf("************************************\n");
-    printf("****** 1. Add      2.Del************\n");
-    printf("****** 3. Modify   4.Check**********\n");
-    printf("****** 5. Sort     6.Print**********\n");
-    printf("****** 0. Exit            **********\n");
-    printf("************************************\n");
-}
+// void Print(){
+//     printf("************************************\n");
+//     printf("****** 1. Add      2.Del************\n");
+//     printf("****** 3. Modify   4.Check**********\n");
+//     printf("****** 5. Sort     6.Print**********\n");
+//     printf("****** 0. Exit            **********\n");
+//     printf("************************************\n");
+// }
 
+
+// int main(){
+//     int input = 0;
+//     struct Contanct con;
+//     // 初始化数组元素为 0
+//     InitContanct(&con);
+
+//     do
+//     {
+//         Print();
+//         printf("Please Input: ");
+//         scanf("%d",&input);
+//         /* code */
+//         switch (input)
+//         {
+//             case 1:
+//                 /* code */
+//                 AddContanct(&con);
+//                 break;
+//             case 2:
+//                 break;
+//             case 3:
+//                 break;
+//             case 4:
+//                 break;
+//             case 5:
+//                 break;
+//             case 6:
+//                 DisplayContanct(&con);
+//                 break;
+//             case 0:
+//                 printf("Exit\n");
+//                 break;
+//             default:
+//                 printf("Input Error!\n");
+//                 continue;
+//         }
+//     } while (input);
+    
+//     return 0;
+// }
+
+
+// 内存  -> 栈区
+    //  局部变量，函数形参
+// 内存 -> 堆区
+    //  动态分配
+// 内存 -> 静态区
+    // 全局变量，静态变量
+
+
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <stdio.h>
 
 int main(){
-    int input = 0;
-    struct Contanct con;
-    // 初始化数组元素为 0
-    InitContanct(&con);
-
-    do
-    {
-        Print();
-        printf("Please Input: ");
-        scanf("%d",&input);
-        /* code */
-        switch (input)
-        {
-            case 1:
-                /* code */
-                AddContanct(&con);
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                DisplayContanct(&con);
-                break;
-            case 0:
-                printf("Exit\n");
-                break;
-            default:
-                printf("Input Error!\n");
-                continue;
+    // 申请内存
+    int* arr= malloc(40);
+    if (arr == NULL){
+        printf("%s\n", strerror(errno));
+    }else{
+        for(int i=0;i<10;i++){
+            *(arr+i) = i;
         }
-    } while (input);
-    
+        for(int i=0;i<10;i++){
+        printf("%d\n", *(arr+i));
+        }
+    }
+
+    free(arr);
+    arr=NULL;
     return 0;
 }
+
