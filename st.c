@@ -2509,20 +2509,53 @@
 
 int main(){
     // 申请内存
-    int* arr= malloc(40);
-    if (arr == NULL){
-        printf("%s\n", strerror(errno));
-    }else{
-        for(int i=0;i<10;i++){
-            *(arr+i) = i;
-        }
-        for(int i=0;i<10;i++){
-        printf("%d\n", *(arr+i));
-        }
-    }
+    //int* arr= malloc(40); // 开辟空间
+    //if (arr == NULL){
+    //    printf("%s\n", strerror(errno));
+    //}else{
+    //    for(int i=0;i<10;i++){
+    //        *(arr+i) = i;
+    //    }
+    //    for(int i=0;i<10;i++){
+    //    printf("%d\n", *(arr+i));
+    //    }
+    //}
+    //int* p = calloc(10,sizeof(int)); // 开辟空间,初始化值为0
+    //if ( p == NULL){
+    //  printf("%s\n",strerror(errno));
+    //}else{
+    //  for(int i=0; i<10;i++){
+    //    printf("%d\n",*(p+i));
+    //  }
+    //}
 
-    free(arr);
-    arr=NULL;
+    //free(p); // 针对堆区
+    //p=NULL;
+
+    int* p = malloc(20);
+    if ( p != NULL ){
+      for(int i=0;i<5;i++){
+        *(p+i) = i;
+      }
+    }
+    // realloc 动态调整空间(1).原空间后追加 (2).开启新空间转移元素，并销毁原空间 (3).可能返回空指针
+    int* ptr = realloc(p,40);
+    if ( ptr != NULL ){
+      p = ptr;
+
+      for(int i=5;i<10;i++){
+        *(p+i) = i;
+      }
+
+      for(int i=0;i<10;i++){
+        printf("%d\n",*(p+i));
+      }
+    }
+    free(p);
+    p=NULL;
     return 0;
 }
+
+
+
 
