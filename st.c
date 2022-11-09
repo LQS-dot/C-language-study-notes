@@ -2495,7 +2495,7 @@
 
 
 // 内存  -> 栈区
-    //  局部变量，函数形参
+    //  局部变量，函数形参, 栈区变量出函数即销毁,堆区和静态区则不会
 // 内存 -> 堆区
     //  动态分配
 // 内存 -> 静态区
@@ -2574,10 +2574,96 @@
 //  printf(str);
 //}
 
+//int main(){
+//  // Test();
+//  char* p = "aaa";
+//  printf("%s\n",p);
+//  p = "nb";
+//  printf("%s\n",p);
+//  return 0;
+//}
+
+// 柔性数组
+//
+//struct St{
+//  int n;
+//  int arr[0];
+//};
+//
+//
+//int main(){
+//  struct St* S = malloc(sizeof(struct St)+5*sizeof(int));
+//  S->n = 100;
+//
+//  for(int i=0;i<5;i++){
+//    S->arr[i] = i;
+//  }
+//
+//  for(int i=0;i<5;i++){
+//    printf("%d\n", S->arr[i]);
+//  }
+//
+//  // realloc
+//  struct St* p = realloc(S,44);
+//  if (p != NULL){
+//    S = p;
+//  }
+//  for(int i=5;i<50;i++){
+//    S->arr[i] = i;
+//  }
+//
+//  for(int i=0;i<50;i++){
+//    printf("%d\n",S->arr[i]);
+//  }
+//  free(S);
+//  S = NULL;
+//  return 0;
+//}
+
+struct S {
+  int n;
+  int* arr;
+};
+
 int main(){
-  Test();
+  struct S* p = malloc(sizeof(struct S));
+  p->arr = malloc(20);
+
+  for(int i=0;i<5;i++){
+    p->arr[i] = i;
+  }
+
+  for(int i=0;i<5;i++){
+    printf("%d\n",p->arr[i]);
+  }
+
+  int* ptr = realloc(p->arr,40);
+  if( ptr != NULL ){
+    p->arr = ptr;
+  }
+  for(int i=5;i<10;i++){
+    p->arr[i] = i;
+  }
+
+  for(int i=0;i<10;i++){
+    printf("%d\n",p->arr[i]);
+  }
+
+  free(p->arr);
+  p->arr = NULL;
+  free(p);
+  p = NULL;
   return 0;
 }
+
+
+
+
+
+
+
+
+
 
 
 
