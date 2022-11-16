@@ -2641,13 +2641,14 @@ int main(){
   if( ptr != NULL ){
     p->arr = ptr;
   }
-  for(int i=5;i<10;i++){
+  for(int i=5;i<20;i++){
     p->arr[i] = i;
   }
 
-  for(int i=0;i<10;i++){
+  for(int i=0;i<20;i++){
     printf("%d\n",p->arr[i]);
   }
+  printf("%d\n", sizeof(p->arr));
 
   free(p->arr);
   p->arr = NULL;
