@@ -2620,44 +2620,64 @@
 //  return 0;
 //}
 
-struct S {
-  int n;
-  int* arr;
-};
+// struct S {
+//   int n;
+//   int* arr;
+// };
+// 
+// int main(){
+//   struct S* p = malloc(sizeof(struct S));
+//   p->arr = malloc(20);
+// 
+//   for(int i=0;i<5;i++){
+//     p->arr[i] = i;
+//   }
+// 
+//   for(int i=0;i<5;i++){
+//     printf("%d\n",p->arr[i]);
+//   }
+// 
+//   int* ptr = realloc(p->arr,40);
+//   if( ptr != NULL ){
+//     p->arr = ptr;
+//   }
+//   for(int i=5;i<20;i++){
+//     p->arr[i] = i;
+//   }
+// 
+//   for(int i=0;i<20;i++){
+//     printf("%d\n",p->arr[i]);
+//   }
+//   printf("%d\n", sizeof(p->arr));
+// 
+//   free(p->arr);
+//   p->arr = NULL;
+//   free(p);
+//   p = NULL;
+//   return 0;
+// }
 
 int main(){
-  struct S* p = malloc(sizeof(struct S));
-  p->arr = malloc(20);
-
-  for(int i=0;i<5;i++){
-    p->arr[i] = i;
+  FILE* pfr;
+  pfr = fopen("test.txt","w");
+  if ( pfr == NULL ){
+    printf("%s\n",strerror(errno));
   }
+  fputs("abc", pfr);
+  
+  fclose(pfr);
+  pfr == NULL;
 
-  for(int i=0;i<5;i++){
-    printf("%d\n",p->arr[i]);
+  FILE* pfw;
+  pfw = fopen("test.txt","r");
+  // define str
+  char Gets[1024];
+  if(!feof(pfw)){
+    printf("%s\n",fgets(Gets,sizeof(Gets),pfw));
   }
-
-  int* ptr = realloc(p->arr,40);
-  if( ptr != NULL ){
-    p->arr = ptr;
-  }
-  for(int i=5;i<20;i++){
-    p->arr[i] = i;
-  }
-
-  for(int i=0;i<20;i++){
-    printf("%d\n",p->arr[i]);
-  }
-  printf("%d\n", sizeof(p->arr));
-
-  free(p->arr);
-  p->arr = NULL;
-  free(p);
-  p = NULL;
+  
   return 0;
 }
-
-
 
 
 
